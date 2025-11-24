@@ -8,7 +8,7 @@ body {
 }
 
 /* Headings use Poppins for a friendly, modern look */
-h1, h2, h3, h4, h5, h6, .hero-title, .hero-label, .logo a {
+h1, h2, h3, h4, h5, h6, .hero-label, .logo a {
   font-family: 'Poppins', Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -16,8 +16,9 @@ h1, h2, h3, h4, h5, h6, .hero-title, .hero-label, .logo a {
 
 .hero-title {
   font-family: 'Poppins', Arial, sans-serif;
-  font-weight: 500;
+  font-weight: 700; /* Poppins 700 */
   letter-spacing: 0.04em;
+  text-transform: capitalize; /* classical capitals (Title Case) */
 }
 
 .hero-label {
@@ -26,10 +27,33 @@ h1, h2, h3, h4, h5, h6, .hero-title, .hero-label, .logo a {
 
 /* Section titles */
 .section h2 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
   font-family: 'Poppins', Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 600; /* Poppins 600 */
   color: #0b4f51;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.02em;
+  font-size: clamp(32px, 3.6vw, 40px); /* 32–40px */
+  text-transform: capitalize;
+}
+
+.section h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 95%;
+  height: 4px;
+  background: #0E6B72; /* accent bleu canard */
+  border-radius: 999px;
+  opacity: 0.35;
+}
+
+.section h2::after {
+  animation: underline-breathe 6s ease-in-out infinite;
+  transform-origin: center;
 }
 
 /* Card titles */
@@ -50,6 +74,7 @@ h1, h2, h3, h4, h5, h6, .hero-title, .hero-label, .logo a {
 p, li, .main-nav a, .hero-subtitle, .section p, .card p, .form-row input, .form-row textarea {
   font-family: 'Work Sans', Arial, sans-serif;
   font-weight: 400;
+  font-size: clamp(17px, 1.6vw, 18px); /* paragraphs: Work Sans 17-18px */
 }
 
 .main-nav a {
@@ -107,6 +132,80 @@ a {
   padding: 0 1rem;
 }
 
+.site-footer {
+  background: #0b4f51;
+  color: #fefaf5;
+  padding: 2.5rem 0;
+  margin-top: 3rem;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.footer-inner p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.82;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.footer-nav a {
+  color: inherit;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+#back-to-top {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem 0.55rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.55);
+  color: #fffaf4;
+  background: rgba(255,255,255,0.08);
+  box-shadow: inset 0 0 12px rgba(255,255,255,0.05), 0 12px 26px rgba(0,0,0,0.18);
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease, border-color 200ms ease;
+}
+
+#back-to-top::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(-45deg) translateY(-1px);
+  transform-origin: center;
+}
+
+#back-to-top:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.8);
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 18px rgba(255,255,255,0.08), 0 16px 30px rgba(0,0,0,0.22);
+}
+
+#back-to-top:focus-visible {
+  outline: 2px solid #ffd29b;
+  outline-offset: 3px;
+}
+
+.footer-nav a:not(#back-to-top) {
+  opacity: 0.85;
+}
+
 /* SECTIONS */
 .section {
   padding: 3.2rem 0;
@@ -123,6 +222,7 @@ a {
   color: #333;
   line-height: 1.6;
 }
+
 
 /* Cards grid for 'pour-qui' */
 .cards {
@@ -201,6 +301,23 @@ a {
 @media (max-width: 600px) {
   .cards { grid-template-columns: 1fr; }
   .section { padding: 2rem 0; }
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .footer-nav {
+    width: 100%;
+  }
+
+  #back-to-top {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .logo a {
@@ -475,7 +592,9 @@ a {
   display: inline-block;
   padding: 0.85rem 1.6rem;
   border-radius: 999px;
-  font-weight: 700;
+  font-family: 'Poppins', Arial, sans-serif; /* buttons use Poppins */
+  font-weight: 600; /* Poppins 600 */
+  font-size: 16px;
   transition: transform 260ms cubic-bezier(0.2,0.9,0.2,1), box-shadow 260ms cubic-bezier(0.2,0.9,0.2,1), background 200ms ease;
   text-decoration: none;
   vertical-align: middle;
@@ -552,6 +671,12 @@ a {
   0% { transform: scale(1); opacity: 0.8 }
   50% { transform: scale(1.05); opacity: 1 }
   100% { transform: scale(1); opacity: 0.8 }
+}
+
+@keyframes underline-breathe {
+  0% { transform: translateX(-50%) scaleX(1); opacity: .38; }
+  50% { transform: translateX(-50%) scaleX(1.06); opacity: .45; }
+  100% { transform: translateX(-50%) scaleX(1); opacity: .38; }
 }
 
 /* HERO RESPONSIVE */
